@@ -1,7 +1,6 @@
 import React from 'react'
 import { ClientCredentials } from 'simple-oauth2'
 import { GraphQLClient } from 'graphql-request'
-
 import { MetricsQuery } from '../graphql'
 
 export async function getServerSideProps() {
@@ -41,28 +40,11 @@ const client = new GraphQLClient(
 )
 
 export default function App({ accessToken }) {
-  const [metrics, setMetrics] = React.useState()
-
   React.useEffect(() => {
     if (accessToken) {
       window.localStorage.setItem('accessToken', accessToken)
     }
   }, [accessToken])
 
-  React.useEffect(() => {
-    async function fetchData() {
-      try {
-        client.setHeader('authorization', 'Bearer ' + accessToken)
-        const { metrics } = await client.request(MetricsQuery)
-
-        setMetrics(metrics)
-      } catch (error) {}
-    }
-
-    if (accessToken) {
-      fetchData()
-    }
-  }, [accessToken])
-
-  return <div></div>
+  return <div>{accessToken && 'Access granted!'}</div>
 }
