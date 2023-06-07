@@ -1,6 +1,8 @@
 # Propel Demo Dashboard - NextJS & React
 
-This demo app uses Propel to display simple dashboards for your dataset.
+This is a basic NextJS that allows you to connect to your Propel account and display Metrics in a table. 
+
+> Note: This app was created to accompany a blog article that explains how to set it up. When the article is published, I will link to it here.
 
 ## How to use
 
@@ -36,24 +38,9 @@ Leave the other environment variables that are already present in that file, suc
 1. Run `yarn` to install the sample application's dependencies.
 2. Run `yarn dev` to launch the local development server.
 3. Browse to https://localhost:3000.
-4. Select your Metric from the drop-down menu.
-5. Choose one of the sample charts, either a time series or counter visualization.
 
 ### Edit your GraphQL queries
 
-You can now try editing the \*.graphql files in the /graphql/ directory to change the visualizations. For example, you may want to view data on a month-to-month basis instead of looking at the data from week to week.
+Edit the `MetricsQuery` file in /graphql/ directory to use a different query. 
 
-To do so, you just need to edit the `granularity: WEEK` statement in the `TimeSeriesQuery.graphql` file to read `granularity: MONTH` instead.
 
-You'll find the granularity setting inside the `metric` portion of the GraphQL call. Open up the `TimeSeriesQuery.graphql` file and look for the following:
-
-```gql
-  metric(id: $id) {
-    timeSeries(
-      input: {
-        granularity: WEEK
-```
-
-By changing the granularity setting, you will change how your data is broken up in the time series visualization. These changes will automatically refresh in your web browser.
-
-You can read additional information in [Propel GraphQL API docs](https://www.propeldata.com/docs/api/about-the-graphql-api), specifically on the page for `TimeSeriesInput` at [TimeSeries Input reference docs](https://www.propeldata.com/docs/api/reference/inputs/TimeSeriesInput).
